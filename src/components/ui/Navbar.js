@@ -1,21 +1,12 @@
-import React, { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useWeb3React } from "@web3-react/core";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { ConnectWalletButton } from "./ConnectWalletButton";
 
 export const Navbar = () => {
   //const navigate = useNavigate();
 
-  //const { user, dispatch } = useContext(AuthContext);
-
-  const handleLogout = () => {
-    // const action = {
-    //   type: types.logout,
-    // };
-    // dispatch(action);
-    // localStorage.removeItem("user");
-    // navigate("/login", {
-    //   replace: true,
-    // });
-  };
+  const { active, account } = useWeb3React();
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -25,15 +16,15 @@ export const Navbar = () => {
 
       <div className="navbar-collapse">
         <div className="navbar-nav">
-        <NavLink
+          <NavLink
             className={({ isActive }) =>
               "nav-item nav-link " + (isActive ? "active" : "")
             }
-            to="/mint"
+            to="/admin"
           >
-            Mint
+            Admin
           </NavLink>
-          
+
           <NavLink
             className={({ isActive }) =>
               "nav-item nav-link " + (isActive ? "active" : "")
@@ -63,8 +54,14 @@ export const Navbar = () => {
       </div>
 
       <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
-        <ul className="navbar-nav ml-auto">
-          <span className="nav-item nav-link text-info">wallet</span>
+        <ul className="navbar-nav ml-auto me-2">
+          {active ? (
+            <span className="nav-item nav-link text-info">
+              {account ? account : "no wallet"}
+            </span>
+          ) : (
+            <ConnectWalletButton />
+          )}
         </ul>
       </div>
     </nav>
