@@ -5,10 +5,9 @@ const lands = [
     {
     "land_image":"../../media/SendaDarwin1-6x2ha.png",
 	"id":"000",
-    "vcu":102.90,
-    "total_tokens":102,
-    "available_tokens":100,
     "coordinates":"-41.866667,-73.666667",
+    "co2_total":102.90,
+    "co2_bought":102,
 	"purchase_date":"16-03-2022",
 	"liberation_date":"16-04-2022",
 	"profit":1000
