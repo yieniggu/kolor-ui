@@ -12,8 +12,10 @@ export const login = (email, password) => {
     if (body.ok) {
       saveTokenOnLocalStorage(body.token);
 
-      dispatch(loginAction({ uid: body.uid, name: body.name }));
-      dispatch(uiCloseModal);
+      dispatch(uiCloseModal());
+      dispatch(
+        loginAction({ uid: body.uid, name: body.name, role: body.role })
+      );
     } else {
       Swal.fire("Error", body.msg, "error");
     }
