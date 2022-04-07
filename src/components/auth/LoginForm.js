@@ -8,7 +8,7 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange] = useForm({
-    email: "client@kolor.com",
+    email: "dev@kolor.com",
     password: "123456",
   });
 
