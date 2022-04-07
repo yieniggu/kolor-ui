@@ -5,7 +5,7 @@ import { LoginButton } from "./buttons/LoginButton";
 import { LogoutButton } from "./buttons/LogoutButton";
 
 export const Navbar = () => {
-  const { checking, uid } = useSelector((state) => state.auth);
+  const { checking, uid, role } = useSelector((state) => state.auth);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -15,23 +15,27 @@ export const Navbar = () => {
 
       <div className="navbar-collapse">
         <div className="navbar-nav">
-          <NavLink
-            className={({ isActive }) =>
-              "nav-item nav-link " + (isActive ? "active" : "")
-            }
-            to="/admin"
-          >
-            Admin
-          </NavLink>
+          {role === "admin" && (
+            <NavLink
+              className={({ isActive }) =>
+                "nav-item nav-link " + (isActive ? "active" : "")
+              }
+              to="/admin"
+            >
+              Admin
+            </NavLink>
+          )}
 
-          <NavLink
-            className={({ isActive }) =>
-              "nav-item nav-link " + (isActive ? "active" : "")
-            }
-            to="/dashboard"
-          >
-            Dashboard
-          </NavLink>
+          {!!uid && (
+            <NavLink
+              className={({ isActive }) =>
+                "nav-item nav-link " + (isActive ? "active" : "")
+              }
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+          )}
 
           <NavLink
             className={({ isActive }) =>
