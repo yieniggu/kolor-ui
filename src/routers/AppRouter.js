@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdminScreen } from "../components/admin/AdminScreen";
+import { LoginModal } from "../components/auth/LoginModal";
 import { DashboardScreen } from "../components/dashboard/DashboardScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { LandScreen } from "../components/land/LandScreen";
@@ -11,6 +12,7 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Navbar />
+      <LoginModal />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/marketplace" element={<MarketplaceScreen />} />
