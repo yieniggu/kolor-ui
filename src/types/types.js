@@ -7,4 +7,6 @@ export const types = {
   authLogin: "[auth] Login",
   authStartTokenRenew: "[auth] Start token Renew",
   authLogout: "[auth] Logout",
+  
+  alterLand: "[land] Update or Insert land",
 };

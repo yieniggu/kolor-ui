@@ -2,11 +2,11 @@ import React from "react";
 import {LandList} from "./LandList"
 import { useStore } from 'react-redux'
 
-export const DashboardScreen = () => {
+export const DashboardScreen_Client = () => {
   const store = useStore();
   return (
     <>
-	<h1>Landowner Dashboard</h1>
+	<h1>Client Dashboard</h1>
 	<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr", gridGap: "10px", borderStyle: "solid", borderRadius: "5px" }}>
 		<div>
 			<p>Land spot</p>

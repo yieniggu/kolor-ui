@@ -3,7 +3,6 @@ import { types } from "../types/types";
 const initialState = {
   modalOpen: false,
 };
-
 // Reducer to handle ui changes like opening a modal
 export const uiReducer = (state = initialState, action) => {
   switch (action.type) {
