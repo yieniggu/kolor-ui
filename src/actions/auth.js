@@ -40,3 +40,28 @@ const saveTokenOnLocalStorage = (token) => {
   localStorage.setItem("token", token);
   localStorage.setItem("token-init-date", new Date().getTime());
 };
+
+export const startChecking = () => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken("auth/refresh");
+
+    const body = await resp.json();
+    console.log(body);
+
+    if (body.ok) {
+      saveTokenOnLocalStorage(body.token);
+
+      dispatch(
+        loginAction({
+          uid: body.uid,
+          name: body.name,
+          role: body.role,
+        })
+      );
+    } else {
+      dispatch(checkingFinish());
+    }
+  };
+};
+
+const checkingFinish = () => ({ type: types.authCheckingFinish });

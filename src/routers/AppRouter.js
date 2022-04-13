@@ -1,6 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { startChecking } from "../actions/auth";
 import { AdminScreen } from "../components/admin/AdminScreen";
 import { LoginModal } from "../components/auth/LoginModal";
 import { DashboardScreen } from "../components/dashboard/DashboardScreen";
@@ -12,9 +13,16 @@ import { AdminRoute } from "./AdminRoute";
 import { PrivateRoute } from "./PrivateRoute";
 
 export const AppRouter = () => {
-  const { role, uid } = useSelector((state) => state.auth);
+  const { checking, role, uid } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  return (
+  useEffect(() => {
+    dispatch(startChecking());
+  }, [dispatch]);
+
+  return checking ? (
+    <h3>checking...</h3>
+  ) : (
     <BrowserRouter>
       <Navbar />
       <LoginModal />
