@@ -46,7 +46,7 @@ export const Navbar = () => {
             Marketplace
           </NavLink>
         </div>
-        <div className="navbar-nav ms-auto me-3">
+        <div className="navbar-nav ms-auto me-5">
           {!!uid ? <LogoutButton /> : <LoginButton />}
         </div>
       </div>
