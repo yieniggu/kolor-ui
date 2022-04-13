@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { mintNFT } from "../../../actions/NFT";
+
 import { useForm } from "../../../hooks/useForm";
 import { NFTMintingForm } from "./NFTMintingForm";
-import { PointsForm } from "./PointsForm";
-import { SpeciesForm } from "./SpeciesForm";
+import { PointsAdded } from "./points/PointsAdded";
+import { PointsForm } from "./points/PointsForm";
+import { SpeciesAdded } from "./species/SpeciesAdded";
+import { SpeciesForm } from "./species/SpeciesForm";
 
 export const NFTMintingPanel = () => {
+  const dispatch = useDispatch();
+
   const [landAttributes, handleLandInputChange, landReset] = useForm({
     toAddress: "",
     name: "",
@@ -17,7 +24,7 @@ export const NFTMintingPanel = () => {
 
   const [speciesAttributes, handleSpeciesInputChange, speciesReset] = useForm({
     speciesAlias: "",
-    speciesScientificName: "",
+    scientificName: "",
     density: 0,
     size: 0,
     TCO2perSecond: 0,
@@ -28,8 +35,22 @@ export const NFTMintingPanel = () => {
     longitude: 0,
   });
 
+  const [species, setSpecies] = useState([]);
+  const [points, setPoints] = useState([]);
+
+  const handleMint = () => {
+    // console.log(landAttributes, species, points);
+
+    const NFT = { landAttributes, species, points };
+    dispatch(mintNFT(NFT));
+
+    // landReset();
+    // setSpecies([]);
+    // setPoints([]);
+  };
+
   return (
-    <div className="text-center">
+    <div>
       <div className="row">
         <NFTMintingForm
           landAttributes={landAttributes}
@@ -43,10 +64,12 @@ export const NFTMintingPanel = () => {
             speciesAttributes={speciesAttributes}
             handleInputChange={handleSpeciesInputChange}
             reset={speciesReset}
+            setSpecies={setSpecies}
           />
         </div>
         <div className="col-6">
-          <h2>Species added</h2>
+          {/* <h2>Species added</h2> */}
+          <SpeciesAdded species={species} />
         </div>
       </div>
       <hr />
@@ -56,12 +79,18 @@ export const NFTMintingPanel = () => {
             pointAttributes={pointAttributes}
             handleInputChange={handlePointInputChange}
             reset={pointReset}
+            setPoints={setPoints}
           />
         </div>
         <div className="col-6">
-          <h2>Points added</h2>
+          {/* <h2>Points added</h2> */}
+          <PointsAdded points={points} />
         </div>
       </div>
+
+      <button onClick={handleMint} className="btn btn-primary fab">
+        Mint!
+      </button>
     </div>
   );
 };
