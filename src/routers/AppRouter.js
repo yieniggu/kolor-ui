@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { startChecking } from "../actions/auth";
+import { getAllNFTs } from "../actions/NFT";
 import { AdminScreen } from "../components/admin/AdminScreen";
 import { LoginModal } from "../components/auth/LoginModal";
 import { DashboardScreen } from "../components/dashboard/DashboardScreen";
@@ -14,6 +15,7 @@ import { PrivateRoute } from "./PrivateRoute";
 
 export const AppRouter = () => {
   const { checking, role, uid } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export const AppRouter = () => {
 
         <Route path="/" element={<HomeScreen />} />
         <Route path="/marketplace" element={<MarketplaceScreen />} />
-        <Route path="/land/:id" element={<LandScreen />} />
+        <Route path="/lands/:id" element={<LandScreen />} />
       </Routes>
     </BrowserRouter>
   );
