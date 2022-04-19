@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
 export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
+  const { mintingNFT } = useSelector((state) => state.NFT);
+
   const {
     toAddress,
     name,
@@ -13,7 +16,6 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
 
   return (
     <div>
-      <h2 className="text-center">Land NFT minting</h2>
       <form className="container">
         <div className="form-floating">
           <input
@@ -22,9 +24,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="toAddress"
             className="form-control"
             placeholder="0x1234..."
-            autoComplete="off"
+            // autoComplete="off"
             value={toAddress}
             onChange={handleInputChange}
+            disabled={true}
           />
           <label htmlFor="toAddress">Land Owner Address</label>
         </div>
@@ -36,9 +39,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="name"
             className="form-control"
             placeholder="0x1234..."
-            autoComplete="off"
+            // autoComplete="off"
             value={name}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="name">Land Name</label>
         </div>
@@ -50,9 +54,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="landOwnerAlias"
             className="form-control"
             placeholder="Netflix"
-            autoComplete="off"
+            // autoComplete="off"
             value={landOwnerAlias}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="landOwnerAlias">Land Owner Alias</label>
         </div>
@@ -64,9 +69,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="size"
             className="form-control"
             placeholder="0x1234..."
-            autoComplete="off"
+            // autoComplete="off"
             value={size}
             onChange={handleInputChange}
+            disabled={mintingNFT}
             min={0}
             step={0.0001}
           />
@@ -80,9 +86,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="country"
             className="form-control"
             placeholder="0x1234..."
-            autoComplete="off"
+            // autoComplete="off"
             value={country}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="country">Country</label>
         </div>
@@ -94,9 +101,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="stateOrRegion"
             className="form-control"
             placeholder="0x1234..."
-            autoComplete="off"
+            // autoComplete="off"
             value={stateOrRegion}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="stateOrRegion">State or Region</label>
         </div>
@@ -108,9 +116,10 @@ export const NFTMintingForm = ({ landAttributes, handleInputChange }) => {
             name="city"
             className="form-control"
             placeholder="0x1234..."
-            autoComplete="off"
+            // autoComplete="off"
             value={city}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="city">City</label>
         </div>

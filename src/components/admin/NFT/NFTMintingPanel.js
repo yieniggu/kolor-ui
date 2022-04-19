@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { mintNFT } from "../../../actions/NFT";
 
 import { useForm } from "../../../hooks/useForm";
@@ -12,8 +12,10 @@ import { SpeciesForm } from "./species/SpeciesForm";
 export const NFTMintingPanel = () => {
   const dispatch = useDispatch();
 
+  const { mintingNFTSuccess } = useSelector((state) => state.NFT);
+
   const [landAttributes, handleLandInputChange, landReset] = useForm({
-    toAddress: "",
+    toAddress: "0xF600c24AdC748AA5B42b94A9D39053299ffEA2f2",
     name: "",
     landOwnerAlias: "",
     size: 0,
@@ -38,15 +40,19 @@ export const NFTMintingPanel = () => {
   const [species, setSpecies] = useState([]);
   const [points, setPoints] = useState([]);
 
+  useEffect(() => {
+    if (mintingNFTSuccess) {
+      landReset();
+      setSpecies([]);
+      setPoints([]);
+    }
+  }, [mintingNFTSuccess]);
+
   const handleMint = () => {
     // console.log(landAttributes, species, points);
 
     const NFT = { landAttributes, species, points };
     dispatch(mintNFT(NFT));
-
-    // landReset();
-    // setSpecies([]);
-    // setPoints([]);
   };
 
   return (
