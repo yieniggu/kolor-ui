@@ -72,7 +72,7 @@ export const NFTReducer = (state = initialState, action) => {
     case types.NFTPublishingSof:
       return {
         ...state,
-        allNFTs: action.payload.mintedLands,
+        allNFTs: action.payload,
       };
 
     case types.NFTPublishing:
