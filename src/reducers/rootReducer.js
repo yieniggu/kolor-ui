@@ -9,5 +9,5 @@ export const rootReducer = combineReducers({
   ui: uiReducer,
   //calendar: calendarReducer,
   auth: authReducer,
-  land: landReducer,
+  lands: landReducer,
 });

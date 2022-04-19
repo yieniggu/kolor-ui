@@ -3,7 +3,7 @@ import React from "react";
 export class LandCard extends React.Component {
     render() {
         return (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr, 1fr", gridGap: "20px", borderStyle: "solid", borderRadius: "5px" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr, 1fr", gridGap: "20px", borderStyle: "solid", borderRadius: "5px" }} id={'land_'+this.props.id}>
                 <div>
                     <img src={this.props.land_image}></img>
                 </div>

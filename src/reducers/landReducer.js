@@ -20,7 +20,7 @@ export const landReducer = (state = initialState, action) => {
     case types.alterLand:
       return {
         lands: [
-            ...state.lands.filter( x => x.id !== action.payload.id),
+            ...state.filter( x => x.id !== action.payload.id),
             action.payload,
         ]
       };
