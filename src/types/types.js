@@ -1,9 +1,31 @@
 // Types used for setting states on redux
 export const types = {
-  uiOpenModal: "[ui] Open Login Modal",
-  uiCloseModal: "[ui] Close Login Modal",
+  uiOpenLoginModal: "[ui] Open Login Modal",
+  uiCloseLoginModal: "[ui] Close Login Modal",
 
-  NFTMint: "[NFT] Mint new NFT",
+  uiOpenOffsetModal: "[ui] Open offset Modal",
+  uiCloseOffsetModal: "[ui] Close offset modal",
+
+  NFTMintToggle: "[NFT] Starting or (ending with errors) new NFT",
+  NFTMintFinished: "[NFT] New NFT Minted success",
+
+  NFTGetStart: "[NFT] Getting land information",
+  NFTGetFinished: "[NFT] Land information fetched",
+
+  NFTsGetStart: "[NFT] Getting all lands information",
+  NFTsGetFinished: "[NFT] All Lands information fetched",
+
+  NFTsGetPublished: "[NFT] Getting published lands",
+  NFTsGetPublishedFinished: "[NFT] All published lands fetched",
+
+  NFTPublishingSof: "[NFT] Publishing selected land to marketplace sof",
+  NFTPublishing: "[NFT] Land published succesfully",
+
+  offsetRequestStart: "[offset] New offset request",
+  offsetRequestFinish: "[ofset] Offset request finished",
+
+  offsetRequestsGetStart: "[offset] Getting offset requests",
+  offsetRequestsGetFinish: "[offset] All requests fetched",
 
   authCheckingFinish: "[auth] Finish checking login state",
   authLogin: "[auth] Login",
