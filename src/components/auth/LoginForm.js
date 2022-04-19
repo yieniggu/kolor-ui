@@ -23,9 +23,9 @@ export const LoginForm = () => {
     <div className="container login-container">
       <div className="row">
         <div className="col">
-          <h3>Ingreso</h3>
+          <h3 className="text-center">Ingreso</h3>
           <form onSubmit={handleLogin}>
-            <div className="form-group">
+            <div className="form-floating">
               <input
                 type="text"
                 className="form-control"
@@ -34,8 +34,9 @@ export const LoginForm = () => {
                 value={email}
                 onChange={handleInputChange}
               />
+              <label htmlFor="email">Email</label>
             </div>
-            <div className="form-group">
+            <div className="form-floating">
               <input
                 type="password"
                 className="form-control"
@@ -44,6 +45,7 @@ export const LoginForm = () => {
                 value={password}
                 onChange={handleInputChange}
               />
+              <label htmlFor="password">Password</label>
             </div>
             <div className="form-group text-center">
               <input type="submit" className="btnSubmit" value="Login" />

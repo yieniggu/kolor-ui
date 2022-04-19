@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { uiCloseModal } from "../../actions/UI";
+import { uiCloseLoginModal } from "../../actions/UI";
 import { LoginForm } from "./LoginForm";
 
 const customStyles = {
@@ -20,18 +20,18 @@ Modal.setAppElement("#root");
 export const LoginModal = () => {
   const dispatch = useDispatch();
 
-  const { modalOpen } = useSelector((state) => state.ui);
-  console.log(modalOpen);
+  const { loginModalOpen } = useSelector((state) => state.ui);
+  console.log(loginModalOpen);
 
   const closeModal = () => {
     //TODO: close modal
-    dispatch(uiCloseModal());
+    dispatch(uiCloseLoginModal());
   };
 
   return (
     <div>
       <Modal
-        isOpen={modalOpen}
+        isOpen={loginModalOpen}
         //   onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}

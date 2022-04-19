@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { uiOpenModal } from "../../../actions/UI";
+import { uiOpenLoginModal } from "../../../actions/UI";
 
 export const LoginButton = () => {
   const dispatch = useDispatch();
 
   const openLoginModal = () => {
     console.log("login button clicked");
-    dispatch(uiOpenModal());
+    dispatch(uiOpenLoginModal());
   };
 
   return (
