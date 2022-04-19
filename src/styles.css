@@ -80,3 +80,7 @@ body {
   position: fixed;
   left: 25px;
 }
+
+.fab.kolor {
+  background-color: greenyellow;
+}
