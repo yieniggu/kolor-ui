@@ -1,7 +1,7 @@
 import { fetchWithoutToken, fetchWithToken } from "../helpers/fetch";
 import { types } from "../types/types";
 import Swal from "sweetalert2";
-import { uiCloseModal } from "./UI";
+import { uiCloseLoginModal } from "./UI";
 
 export const login = (email, password) => {
   return async (dispatch) => {
@@ -12,7 +12,7 @@ export const login = (email, password) => {
     if (body.ok) {
       saveTokenOnLocalStorage(body.token);
 
-      dispatch(uiCloseModal());
+      dispatch(uiCloseLoginModal());
       dispatch(
         loginAction({ uid: body.uid, name: body.name, role: body.role })
       );
