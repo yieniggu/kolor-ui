@@ -145,7 +145,7 @@ const normalizeNumber = (number, decimals = 0, round = true) => {
   // decimals = Number(decimals);
 
   const result = number * Math.pow(10, decimals);
-  console.log(result);
+  //console.log(result);
 
   if (round) return Math.round(result);
 
@@ -172,7 +172,7 @@ const getDate = (dateInTimestamp) => {
 };
 
 const roundValue = (value, decimals) => {
-  console.log(value, decimals);
+ //console.log(value, decimals);
   return Number(Math.round(value + "e+" + decimals) + "e-" + decimals);
 };
 
