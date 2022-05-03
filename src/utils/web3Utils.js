@@ -1,7 +1,9 @@
-const fiveYearsInSeconds = 31536000 * 5;
+import fromExponential from "from-exponential";
+
+export const oneYearInSeconds = 31536000;
 
 // Count decimals of a given number
-const countDecimals = (number) => {
+export const countDecimals = (number) => {
   if (Math.floor(number) === number) return 0;
 
   let str = number.toString();
@@ -13,7 +15,7 @@ const countDecimals = (number) => {
 };
 
 // Get the numbers (attributes) of a given object
-const extractNumberTypes = (object) => {
+export const extractNumberTypes = (object) => {
   // extract object keys
   const keys = Object.keys(object);
 
@@ -29,7 +31,7 @@ const extractNumberTypes = (object) => {
   return numbers;
 };
 
-const extractMaxDecimals = (numbers) => {
+export const extractMaxDecimals = (numbers) => {
   let maxDecimals = 0;
   numbers.forEach((number) => {
     let currentDecimals = countDecimals(number);
@@ -42,7 +44,7 @@ const extractMaxDecimals = (numbers) => {
 // Converts an array of objects to an array of arrays,
 //  as solidity handles arrays of structs this way!
 // ej: [{a, b, c}], {d, e, f}] -> [[a, b, c], [d, e, f]]
-const convertSpeciesToArray = (species) => {
+export const convertSpeciesToArray = (species) => {
   let speciesAsArrays = [];
 
   species.map((specie) => {
@@ -53,7 +55,7 @@ const convertSpeciesToArray = (species) => {
       speciesAlias,
       scientificName,
       size,
-      initialTCO2,
+      initialTCO2perYear,
       TCO2perSecond,
       density,
     } = specie;
@@ -69,7 +71,7 @@ const convertSpeciesToArray = (species) => {
       normalizeNumber(size, decimals), // As solidity only handle numbers as integers!
       decimals,
       normalizeNumber(TCO2perSecond, decimals),
-      normalizeNumber(initialTCO2, decimals),
+      normalizeNumber(initialTCO2perYear, decimals),
       0,
       0,
       0
@@ -84,7 +86,7 @@ const convertSpeciesToArray = (species) => {
 // Converts a set of objects inside an array to an
 // array of arrays, as solidity handles arrays of structs this way!
 // ej: [{a, b, c}], {d, e, f}] -> [[a, b, c], [d, e, f]]
-const convertPointsToArray = (points) => {
+export const convertPointsToArray = (points) => {
   let pointsAsArrays = [];
 
   points.map((coordinate) => {
@@ -110,7 +112,7 @@ const convertPointsToArray = (points) => {
 };
 
 // Convert numbers from strings to numbers
-const refactorPoints = (points) => {
+export const refactorPoints = (points) => {
   points.latitude = Number(points.latitude);
   points.longitude = Number(points.longitude);
 
@@ -118,8 +120,8 @@ const refactorPoints = (points) => {
 };
 
 // Convert numbers from strings to numbers
-const refactorSpecie = (specie) => {
-  specie.initialTCO2 = Number(getInitialTCO2([specie]));
+export const refactorSpecie = (specie) => {
+  specie.initialTCO2perYear = Number(getInitialTCO2perYear([specie]));
   specie.size = Number(specie.size);
   specie.density = Number(specie.density);
   specie.TCO2perSecond = Number(specie.TCO2perSecond);
@@ -129,7 +131,7 @@ const refactorSpecie = (specie) => {
 
 // Extract the max decimals of an object with different
 // floating point numbers (decimal part)
-const maxDecimalsOf = (object) => {
+export const maxDecimalsOf = (object) => {
   const numbers = extractNumberTypes(object);
 
   const maxDecimals = extractMaxDecimals(numbers);
@@ -140,47 +142,50 @@ const maxDecimalsOf = (object) => {
 
 // This function normalize a number to account for decimals
 // given that solidity only work with integer numbers
-const normalizeNumber = (number, decimals = 0, round = true) => {
+export const normalizeNumber = (number, decimals = 0, round = true) => {
   // number = Number(number);
   // decimals = Number(decimals);
 
-  const result = number * Math.pow(10, decimals);
-  //console.log(result);
+  let result = number * Math.pow(10, decimals);
+  //console.log("result before: ", result);
+
+  decimals = decimals.toString();
+
+  result = result.toString();
+
+  if (result.includes("e")) {
+    result = fromExponential(result);
+    //console.log("includes exponential");
+
+    return fromExponential(roundValue(result, decimals * -1));
+  }
+
+  //console.log("result after: ", result);
 
   if (round) return Math.round(result);
 
-  decimals = decimals.toString();
-  return roundValue(result, decimals*-1);
+  return roundValue(result, decimals * -1);
 };
 
-// Get the CO2 that a given specie offsets in five years
-const getInitialTCO2 = (species) => {
-  let initialTCO2 = 0;
-
-  species.map((specie) => {
-    initialTCO2 += specie.TCO2perSecond * fiveYearsInSeconds;
-    //console.log("initial tco2 now: ", initialTCO2);
-  });
-
-  return Math.round(initialTCO2);
-};
-
-const getDate = (dateInTimestamp) => {
-  const date = new Date(dateInTimestamp * 1000);
-
-  return date.toLocaleString();
-};
-
-const roundValue = (value, decimals) => {
- //console.log(value, decimals);
+export const roundValue = (value, decimals) => {
+  //console.log(value, decimals);
   return Number(Math.round(value + "e+" + decimals) + "e-" + decimals);
 };
 
-module.exports = {
-  maxDecimalsOf,
-  normalizeNumber,
-  convertSpeciesToArray,
-  convertPointsToArray,
-  getInitialTCO2,
-  getDate,
+// Get the CO2 that a given specie offsets in five years
+export const getInitialTCO2perYear = (species) => {
+  let initialTCO2perYear = 0;
+
+  species.map((specie) => {
+    initialTCO2perYear += specie.TCO2perSecond * oneYearInSeconds;
+    //console.log("initial tco2 now: ", initialTCO2perYear);
+  });
+
+  return Math.round(initialTCO2perYear);
+};
+
+export const getDate = (dateInTimestamp) => {
+  const date = new Date(dateInTimestamp * 1000);
+
+  return date.toLocaleString();
 };
