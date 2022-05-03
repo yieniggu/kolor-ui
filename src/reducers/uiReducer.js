@@ -3,6 +3,7 @@ import { types } from "../types/types";
 const initialState = {
   loginModalOpen: false,
   offsetModalOpen: false,
+  tokensModalOpen: false,
 };
 // Reducer to handle ui changes like opening a modal
 export const uiReducer = (state = initialState, action) => {
@@ -29,6 +30,18 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         offsetModalOpen: false,
+      };
+
+    case types.uiOpenTokensModal:
+      return {
+        ...state,
+        tokensModalOpen: true,
+      };
+
+    case types.uiCloseTokensModal:
+      return {
+        ...state,
+        tokensModalOpen: false,
       };
 
     default:

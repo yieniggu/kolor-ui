@@ -67,7 +67,7 @@ body {
 .fab {
   border-radius: 1rem;
   bottom: 50%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding: 1rem;
   position: fixed;
   right: 1rem;
@@ -83,4 +83,71 @@ body {
 
 .fab.kolor {
   background-color: greenyellow;
+}
+
+.card-vcus {
+  background-color: rgb(19, 20, 17);
+  padding: 2rem;
+  color: white;
+}
+
+.fab.tokens {
+  background-color: rgb(146, 138, 138);
+  bottom: 30%;
+}
+
+.modal-tokens {
+  max-width: 75rem;
+  max-height: 35rem;
+}
+
+.tokens-login {
+  margin-top: 7rem;
+}
+
+.get-tokens {
+  color: white;
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.get-tokens.early {
+  background-color: green;
+}
+
+.get-tokens.peak {
+  background-color: yellow;
+}
+
+.get-tokens.late {
+  background-color: red;
+}
+
+.first-holder {
+  color: red;
+  text-align: center;
+  margin: 0;
+  border-style: inset;
+}
+
+.has-holders {
+  color: green;
+  text-align: center;
+  margin: 0;
+  border-style: inset;
+}
+
+.token-info-text {
+  margin-top: 2rem;
+  text-align: justify;
+}
+
+.token-input {
+  max-width: 6rem;
+  text-align: center;
+}
+
+.token-balances {
+  margin-top: 4rem;
 }

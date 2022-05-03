@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { tokenReducer } from "./tokenReducer";
 import { authReducer } from "./authReducer";
 import { NFTReducer } from "./NFTReducer";
 import { offsetReducer } from "./offsetReducer";
@@ -10,4 +11,5 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   NFT: NFTReducer,
   offset: offsetReducer,
+  token: tokenReducer,
 });

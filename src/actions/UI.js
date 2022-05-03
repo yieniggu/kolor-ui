@@ -15,3 +15,11 @@ export const uiOpenOffsetModal = () => ({
 export const uiCloseOffsetModal = () => ({
   type: types.uiCloseOffsetModal,
 });
+
+export const uiOpenTokensModal = () => ({
+  type: types.uiOpenTokensModal,
+});
+
+export const uiCloseTokensModal = () => ({
+  type: types.uiCloseTokensModal,
+});
