@@ -12,7 +12,6 @@ export const LandCard = ({ land }) => {
     name,
     size,
     decimals,
-    currentTCO2,
     stateOrRegion,
     country,
     city,
@@ -64,10 +63,6 @@ export const LandCard = ({ land }) => {
                 </p>
                 <p className="card-text">
                   City: <b>{city}</b>
-                </p>
-                <p className="card-text">
-                  Current TCO2:{" "}
-                  <b>{normalizeNumber(currentTCO2, decimals * -1)}</b>
                 </p>
                 <p className="card-text">
                   Species in this land: <b>{species.length}</b>

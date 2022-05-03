@@ -1,5 +1,9 @@
 import React from "react";
-import { getDate, normalizeNumber } from "../../../utils/web3Utils";
+import {
+  getDate,
+  normalizeNumber,
+  oneYearInSeconds,
+} from "../../../utils/web3Utils";
 
 export const SpecieDetails = (specie) => {
   console.log("specie details: ", specie);
@@ -25,8 +29,12 @@ export const SpecieDetails = (specie) => {
                 {normalizeNumber(specie.density, specie.decimals * -1)}%
               </p>
               <p>
-                <b>TCO2 projected from specie in 5 years: </b>
-                {normalizeNumber(specie.TCO2, specie.decimals * -1)}
+                <b>TCO2 projected from specie per year: </b>
+                {normalizeNumber(
+                  specie.TCO2perSecond * oneYearInSeconds,
+                  specie.decimals * -1,
+                  false
+                ).toString()}
               </p>
               <p>
                 <b>TCO2 offset per second: </b>

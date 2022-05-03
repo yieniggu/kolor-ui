@@ -1,5 +1,5 @@
 import React from "react";
-import { getDate, normalizeNumber } from "../../utils/web3Utils";
+import { getDate, normalizeNumber, roundValue } from "../../utils/web3Utils";
 
 export const LandDetails = ({
   name,
@@ -9,12 +9,14 @@ export const LandDetails = ({
   stateOrRegion,
   city,
   size,
-  initialTCO2,
-  currentTCO2,
+  initialTCO2perYear,
   soldTCO2,
   creationDate,
   decimals,
+  VCUInfo,
 }) => {
+  const { emittedVCUs, projectedVCUS, VCUsLeft } = VCUInfo;
+
   return (
     <div className="row mt-5">
       <div className="col-4">
@@ -39,16 +41,16 @@ export const LandDetails = ({
             <b>City: </b> {city}
           </li>
           <li className="list-group-item">
-            <b>Size (m2)</b>
+            <b>Size (m2): </b>
             {normalizeNumber(size, decimals * -1)}
           </li>
           <li className="list-group-item">
-            <b>Initial TCO2 projected: </b>{" "}
-            {normalizeNumber(initialTCO2, decimals * -1)}
+            <b>Estimated Initial TCO2 projected per year: </b>{" "}
+            {normalizeNumber(initialTCO2perYear, decimals * -1)}
           </li>
           <li className="list-group-item">
-            <b>Current TCO2 projected: </b>{" "}
-            {normalizeNumber(currentTCO2, decimals * -1)}
+            <b>Estimated Current TCO2 projected per year: </b>{" "}
+            {normalizeNumber(projectedVCUS, decimals * -1)}
           </li>
           <li className="list-group-item">
             <b>TCO2 sold from this land: </b>{" "}
@@ -58,6 +60,11 @@ export const LandDetails = ({
             <b>This land was created on: </b>
             {getDate(creationDate)}
           </li>
+
+          <h5 className="card-vcus text-center mt-3">
+            This land has emitted {roundValue(emittedVCUs, 2)} TCO2 and has a
+            remaining of {roundValue(VCUsLeft, 2)} TCO2 to sell.
+          </h5>
         </ul>
       </div>
     </div>

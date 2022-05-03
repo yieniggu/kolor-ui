@@ -4,8 +4,8 @@ export const SpeciesItem = ({
   scientificName,
   speciesAlias,
   density,
-  size,
-  TCO2perSecond,
+  //size,
+  initialTCO2perYear,
 }) => {
   return (
     <div className="accordion-item">
@@ -40,15 +40,15 @@ export const SpeciesItem = ({
           </p>
           <p>
             <strong>Density: </strong>
-            {density}
+            {density}%
           </p>
-          <p>
+          {/* <p>
             <strong>Size (m2): </strong>
             {size}
-          </p>
+          </p> */}
           <p>
-            <strong>TCO2 per second: </strong>
-            {TCO2perSecond}
+            <strong>TCO2 per year: </strong>
+            {initialTCO2perYear}
           </p>
         </div>
       </div>
