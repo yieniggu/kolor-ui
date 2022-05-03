@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export const PointsForm = ({
   pointAttributes,
@@ -7,6 +8,8 @@ export const PointsForm = ({
   setPoints,
 }) => {
   const { latitude, longitude } = pointAttributes;
+
+  const { mintingNFT } = useSelector((state) => state.NFT);
 
   const createpoint = () => {
     return {
@@ -40,6 +43,7 @@ export const PointsForm = ({
             autoComplete="off"
             value={latitude}
             onChange={handleInputChange}
+            disabled={mintingNFT}
             step={0.0001}
           />
           <label htmlFor="latitude">Latitude</label>
@@ -55,13 +59,18 @@ export const PointsForm = ({
             autoComplete="off"
             value={longitude}
             onChange={handleInputChange}
+            disabled={mintingNFT}
             step={0.0001}
           />
           <label htmlFor="Longitude">Longitude (m2)</label>
         </div>
         <br />
         <div className="d-grip gap-2 d-md-flex justify-content-md-end">
-          <button className="btn btn-outline-success me-md-2" type="submit">
+          <button
+            className="btn btn-outline-success me-md-2"
+            type="submit"
+            disabled={mintingNFT}
+          >
             Add
           </button>
         </div>

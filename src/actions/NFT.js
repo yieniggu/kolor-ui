@@ -29,14 +29,14 @@ export const mintNFT = (NFT) => {
   };
 };
 
-const confirmationMessage = (receipts) => {
+export const confirmationMessage = (receipts) => {
   let receiptsMessages = "";
   receipts.map((receipt) => (receiptsMessages += getReceiptInfo(receipt)));
 
   return `Please check the following transactions: <br/> ${receiptsMessages}`;
 };
 
-const getReceiptInfo = (receipt) => {
+export const getReceiptInfo = (receipt) => {
   return `<br/>
   <strong>
   <a href="${
@@ -59,11 +59,18 @@ export const mintNFTActionFinish = (NFT) => ({
 
 export const getNFT = (id) => {
   return async (dispatch) => {
+    dispatch(NFTErrorFalseAction());
     dispatch(getNFTAction());
     const resp = await fetchWithoutToken(`lands/${id}`);
     const body = await resp.json();
 
-    dispatch(finishGetNFTAction(body.NFTInfo));
+    if (body.ok) {
+      dispatch(finishGetNFTAction(body.NFTInfo));
+    } else {
+      console.log("error on getting nft");
+      dispatch(NFTErrorTrueAction());
+    }
+
     console.log(body);
   };
 };
@@ -75,6 +82,14 @@ export const getNFTAction = () => ({
 export const finishGetNFTAction = (NFT) => ({
   type: types.NFTGetFinished,
   payload: NFT,
+});
+
+const NFTErrorTrueAction = () => ({
+  type: types.NFTErrorTrue,
+});
+
+export const NFTErrorFalseAction = () => ({
+  type: types.NFTErrorFalse,
 });
 
 export const getAllNFTs = () => {

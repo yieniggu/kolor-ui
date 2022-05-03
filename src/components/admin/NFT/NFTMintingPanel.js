@@ -12,7 +12,7 @@ import { SpeciesForm } from "./species/SpeciesForm";
 export const NFTMintingPanel = () => {
   const dispatch = useDispatch();
 
-  const { mintingNFTSuccess } = useSelector((state) => state.NFT);
+  const { mintingNFTSuccess, mintingNFT } = useSelector((state) => state.NFT);
 
   const [landAttributes, handleLandInputChange, landReset] = useForm({
     toAddress: "0xF600c24AdC748AA5B42b94A9D39053299ffEA2f2",
@@ -28,8 +28,8 @@ export const NFTMintingPanel = () => {
     speciesAlias: "",
     scientificName: "",
     density: 0,
-    size: 0,
-    TCO2perSecond: 0,
+    //size: 0,
+    initialTCO2perYear: 0,
   });
 
   const [pointAttributes, handlePointInputChange, pointReset] = useForm({
@@ -94,7 +94,11 @@ export const NFTMintingPanel = () => {
         </div>
       </div>
 
-      <button onClick={handleMint} className="btn btn-primary fab">
+      <button
+        onClick={handleMint}
+        className="btn btn-primary fab"
+        disabled={mintingNFT}
+      >
         Mint!
       </button>
     </div>

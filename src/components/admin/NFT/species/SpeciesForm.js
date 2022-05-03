@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { oneYearInSeconds } from "../../../../utils/web3Utils";
 
 export const SpeciesForm = ({
   speciesAttributes,
@@ -6,16 +8,23 @@ export const SpeciesForm = ({
   reset,
   setSpecies,
 }) => {
-  const { speciesAlias, scientificName, density, size, TCO2perSecond } =
-    speciesAttributes;
+  const {
+    speciesAlias,
+    scientificName,
+    density,
+    /* size, */ initialTCO2perYear,
+  } = speciesAttributes;
+
+  const { mintingNFT } = useSelector((state) => state.NFT);
 
   const createSpecies = () => {
     return {
       speciesAlias,
       scientificName,
       density,
-      size,
-      TCO2perSecond,
+      //size,
+      initialTCO2perYear,
+      TCO2perSecond: initialTCO2perYear / oneYearInSeconds,
     };
   };
 
@@ -44,6 +53,7 @@ export const SpeciesForm = ({
             autoComplete="off"
             value={speciesAlias}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="speciesAlias">Species Alias</label>
         </div>
@@ -58,6 +68,7 @@ export const SpeciesForm = ({
             autoComplete="off"
             value={scientificName}
             onChange={handleInputChange}
+            disabled={mintingNFT}
           />
           <label htmlFor="scientificName">Species Scientific Name</label>
         </div>
@@ -72,14 +83,15 @@ export const SpeciesForm = ({
             autoComplete="off"
             value={density}
             onChange={handleInputChange}
+            disabled={mintingNFT}
             min={0}
             max={100}
             step={0.0001}
           />
-          <label htmlFor="density">Density</label>
+          <label htmlFor="density">Density (%)</label>
         </div>
         <br />
-        <div className="form-floating">
+        {/* <div className="form-floating">
           <input
             id="size"
             type="number"
@@ -89,30 +101,36 @@ export const SpeciesForm = ({
             autoComplete="off"
             value={size}
             onChange={handleInputChange}
+            disabled={mintingNFT}
             min={0}
             step={0.0001}
           />
           <label htmlFor="size">Size (m2)</label>
-        </div>
+        </div> */}
         <br />
         <div className="form-floating">
           <input
-            id="TCO2perSecond"
+            id="initialTCO2perYear"
             type="number"
-            name="TCO2perSecond"
+            name="initialTCO2perYear"
             className="form-control"
             placeholder="0x1234..."
             autoComplete="off"
-            value={TCO2perSecond}
+            value={initialTCO2perYear}
             onChange={handleInputChange}
+            disabled={mintingNFT}
             min={0}
-            step={0.0000000001}
+            step={0.00001}
           />
-          <label htmlFor="TCO2perSecond">TCO2 per Second</label>
+          <label htmlFor="initialTCO2perYear">TCO2 per Year</label>
         </div>
         <br />
         <div className="d-grip gap-2 d-md-flex justify-content-md-end">
-          <button className="btn btn-outline-success me-md-2" type="submit">
+          <button
+            className="btn btn-outline-success me-md-2"
+            type="submit"
+            disabled={mintingNFT}
+          >
             Add
           </button>
         </div>

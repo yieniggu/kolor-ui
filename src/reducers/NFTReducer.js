@@ -4,6 +4,7 @@ const initialState = {
   allNFTs: [],
   publishedNFTs: [],
   NFT: {},
+  NFTError: false,
   mintingNFT: false,
   mintingNFTSuccess: false,
   gettingNFT: true,
@@ -53,7 +54,22 @@ export const NFTReducer = (state = initialState, action) => {
       return {
         ...state,
         gettingNFT: false,
+        NFTError: false,
         NFT: action.payload,
+      };
+
+    case types.NFTErrorTrue:
+      return {
+        ...state,
+        NFTError: true,
+        gettingNFT: false,
+      };
+
+    case types.NFTErrorFalse:
+      return {
+        ...state,
+        gettingNFT: false,
+        NFTError: false,
       };
 
     case types.NFTsGetPublished:
