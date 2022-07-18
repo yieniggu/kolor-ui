@@ -1,7 +1,8 @@
 import { types } from "../types/types";
 
 const initialState = {
-  checking: true,
+  checkingBalances: true,
+  checkingInvestments: true,
   buying: false,
   balances: {},
 };
@@ -11,13 +12,13 @@ export const tokenReducer = (state = initialState, action) => {
     case types.tokensGetStart:
       return {
         ...state,
-        checking: true,
+        checkingBalances: true,
       };
 
     case types.tokensGetFinish:
       return {
         ...state,
-        checking: action.payload.checking,
+        checkingBalances: action.payload.checkingBalances,
         balances: action.payload.balances,
       };
 
@@ -25,6 +26,19 @@ export const tokenReducer = (state = initialState, action) => {
       return {
         ...state,
         buying: action.payload,
+      };
+
+    case types.investmentsGetStart:
+      return {
+        ...state,
+        checkingInvestments: true,
+      };
+
+    case types.investmentsGetFinish:
+      return {
+        ...state,
+        checkingInvestments: false,
+        investments: action.payload,
       };
 
     default:

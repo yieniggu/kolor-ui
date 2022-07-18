@@ -68,3 +68,29 @@ const acquireLandTokensAction = (buying) => ({
   type: types.tokenAcquire,
   payload: buying,
 });
+
+export const getInvestments = (uid) => {
+  return async (dispatch) => {
+    dispatch(getInvestmentsStartAction());
+    const resp = await fetchWithToken(`tokens/investments/${uid}`);
+
+    const body = await resp.json();
+    console.log(body);
+
+    if (body.ok) {
+      dispatch(getInvestmentsFinishAction(body.investments));
+    } else {
+      Swal.fire("Error", "Something went wrong =(", "error");
+      dispatch(getInvestmentsFinishAction(null));
+    }
+  };
+};
+
+const getInvestmentsStartAction = () => ({
+  type: types.investmentsGetStart,
+});
+
+const getInvestmentsFinishAction = (investments) => ({
+  type: types.investmentsGetFinish,
+  payload: investments,
+});

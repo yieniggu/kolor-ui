@@ -34,7 +34,7 @@ export const LandTokens = () => {
     <div className="row pt-3 ps-5">
       <div className="col-4">
         <h3 className="text-center">
-          {balances
+          {Object.keys(balances).length > 0
             ? balances.landTokenBalances[NFT.tokenId] > 0
               ? "You're part of this land!"
               : "Be part of this land too!"

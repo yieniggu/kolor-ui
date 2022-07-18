@@ -31,6 +31,9 @@ export const types = {
 
   tokenAcquire: "[token] Acquire land tokens",
 
+  investmentsGetStart: "[token] Fetching investments",
+  investmentsGetFinish: "[token] Finish fetching investments",
+
   offsetRequestStart: "[offset] New offset request",
   offsetRequestFinish: "[ofset] Offset request finished",
 

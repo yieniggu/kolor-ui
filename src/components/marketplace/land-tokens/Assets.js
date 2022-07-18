@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAssetsBalances } from "../../../actions/token";
 
 export const Assets = () => {
-  const { balances, checking } = useSelector((state) => state.token);
-  const { uid, address } = useSelector((state) => state.auth);
+  const { balances, checkingBalances } = useSelector((state) => state.token);
+  const { uid } = useSelector((state) => state.auth);
   const { NFT } = useSelector((state) => state.NFT);
 
   const dispatch = useDispatch();
@@ -19,13 +19,15 @@ export const Assets = () => {
     <div className="ps-4">
       {uid ? (
         <div>
-          {checking ? (
+          {checkingBalances ? (
             <h2>Checking...</h2>
           ) : (
             Object.keys(balances).length > 0 && (
               <div>
                 <h2 className="text-center pt-4">
-                  You currently own <b>{balances.landTokenBalances[NFT.tokenId]}</b> tokens of this land.
+                  You currently own{" "}
+                  <b>{balances.landTokenBalances[NFT.tokenId]}</b> tokens of
+                  this land.
                 </h2>
                 <div className="token-balances">
                   <h4 className="text-center">
@@ -40,8 +42,12 @@ export const Assets = () => {
                   </h4>
                 </div>
 
-                <h2 className="mt-4 text-center">
-                  Not enough funds? <a href="#">Deposit now!</a>
+                <h2 className="mt-4 text-center">Not enough funds?</h2>
+                <h2 className="mt-2 text-center">
+                  <a href="#">
+                    Deposit now to your CELO address:{" "}
+                    <h4>{balances.address}</h4>
+                  </a>
                 </h2>
               </div>
             )

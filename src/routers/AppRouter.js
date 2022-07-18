@@ -47,6 +47,11 @@ export const AppRouter = () => {
           }
         />
 
+        <Route 
+          path="/"
+        
+        />
+
         <Route path="/" element={<HomeScreen />} />
         <Route path="/marketplace" element={<MarketplaceScreen />} />
         <Route path="/lands/:id" element={<LandScreen />} />

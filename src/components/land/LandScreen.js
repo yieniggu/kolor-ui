@@ -64,7 +64,7 @@ export const LandScreen = () => {
             <button
               className="fab tokens"
               onClick={openTokensModal}
-              disabled={NFT.landTokenInfo.available === 0}
+              disabled={NFT.landTokenInfo.available === "0"}
             >
               {NFT.landTokenInfo.available > 0
                 ? "Land Tokens Available!"
