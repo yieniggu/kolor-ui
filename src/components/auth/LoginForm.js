@@ -4,11 +4,11 @@ import { login } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import "./login.css";
 
-export const LoginForm = () => {
+export const LoginForm = ({ setLogin }) => {
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange] = useForm({
-    email: "dev@kolor.com",
+    email: "client@kolor.com",
     password: "123456",
   });
 
@@ -23,7 +23,7 @@ export const LoginForm = () => {
     <div className="container login-container">
       <div className="row">
         <div className="col">
-          <h3 className="text-center">Ingreso</h3>
+          <h3 className="text-center">Login</h3>
           <form onSubmit={handleLogin}>
             <div className="form-floating">
               <input
@@ -46,6 +46,9 @@ export const LoginForm = () => {
                 onChange={handleInputChange}
               />
               <label htmlFor="password">Password</label>
+            </div>
+            <div onClick={() => setLogin(false)}>
+              <a className="text-center">Dont have an account?</a>
             </div>
             <div className="form-group text-center">
               <input type="submit" className="btnSubmit" value="Login" />

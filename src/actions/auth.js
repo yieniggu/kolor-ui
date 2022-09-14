@@ -3,6 +3,34 @@ import { types } from "../types/types";
 import Swal from "sweetalert2";
 import { uiCloseLoginModal } from "./UI";
 
+export const register = (name, email, password) => {
+  return async (dispatch) => {
+    const resp = await fetchWithoutToken(
+      "auth/new",
+      { name, email, password, role: "client" },
+      "POST"
+    );
+
+    const body = await resp.json();
+    console.log(body);
+
+    if (body.ok) {
+      saveTokenOnLocalStorage(body.token);
+
+      dispatch(uiCloseLoginModal());
+
+      dispatch(
+        loginAction({
+          uid: body.uid,
+          name: body.name,
+        })
+      );
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
 export const login = (email, password) => {
   return async (dispatch) => {
     const resp = await fetchWithoutToken("auth", { email, password }, "POST");

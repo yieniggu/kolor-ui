@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { uiCloseLoginModal } from "../../actions/UI";
 import { LoginForm } from "./LoginForm";
+import { RegisterForm } from "./RegisterForm";
 
 const customStyles = {
   content: {
@@ -19,6 +20,8 @@ Modal.setAppElement("#root");
 
 export const LoginModal = () => {
   const dispatch = useDispatch();
+
+  const [login, setLogin] = useState(true);
 
   const { loginModalOpen } = useSelector((state) => state.ui);
   console.log(loginModalOpen);
@@ -40,7 +43,11 @@ export const LoginModal = () => {
         overlayClassName="modal-fondo"
         closeTimeoutMS={200}
       >
-        <LoginForm />
+        {login ? (
+          <LoginForm setLogin={setLogin} />
+        ) : (
+          <RegisterForm setLogin={setLogin} />
+        )}
       </Modal>
     </div>
   );
